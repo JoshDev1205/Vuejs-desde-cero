@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Clase 2</title>
+    <style>
+      .active {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <ul v-for="(message, index) in messages">
+        <li>
+          {{ index }} - {{ message }}
+        </li>
+      </ul>
+      <button @click="addNewMessage">Agregar Mensaje</button>
+      <br />
+      <br />
+      <h1 v-if="linterna">Encendido</h1>
+      <h1 v-else>Apagado</h1>
+      <button @click="turnOnOff">Encender/Apagar y Mostrar nombre</button>
+      <br />
+      <h2
+        :class="{active: showName}"
+        :style="{ backgroundColor: showName ? 'red' : 'aquamarine'}"
+      >
+        Mi nombre es Josh
+      </h2>
+      <button @click="changeShowStatus">Show name</button>
+      <br />
+      <h2>{{ isLinternaOn }}</h2>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          messages: [
+            'Salir a pasear',
+            'Ir al cine',
+            'Estudiar Vuejs en EDteam',
+          ],
+          mainClass: 'container',
+          linterna: false,
+          showName: true,
+        },
+        methods: {
+          addNewMessage() {
+            const message = 'Montar bicicleta'
+            this.messages.push(message)
+          },
+          turnOnOff() {
+            this.linterna = !this.linterna
+          },
+          changeShowStatus() {
+            this.showName = !this.showName
+          },
+        },
+        computed: {
+          isLinternaOn() {
+            return this.linterna && this.showName
+              ? 'La linterna esta encendida'
+              : 'La linterna esta apagada'
+          },
+        },
+        watch: {
+          linterna(value, oldValue) {
+            if (this.showName) {
+              console.log(
+                `La linterna estaba en ${oldValue} y ahora en ${value}`
+              )
+            }
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

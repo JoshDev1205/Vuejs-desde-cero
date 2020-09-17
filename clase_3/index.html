@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Clase 3</title>
+  </head>
+  <body>
+    <div id="app">
+      <primer-component></primer-component>
+      <segundo-component></segundo-component>
+      <tercer-component></tercer-component>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      Vue.component('primer-component', {
+        template: '<h1>Primer Component</h1>',
+      })
+
+      Vue.component('segundo-component', {
+        template: '<primer-component></primer-component>',
+      })
+
+      Vue.component('tercer-component', {
+        template: '<primer-component />',
+      })
+
+      new Vue({
+        el: '#app',
+        component: {
+          secondComponent: 'segundo-component',
+        },
+      })
+    </script>
+  </body>
+</html>
